@@ -1,2 +1,46 @@
-/acme/.git/
-/acme/.gitignore
+acme/.git/
+acme/.gitignore
+acme/HELP.md
+acme/.gradle
+acme/build/
+acme/!gradle/wrapper/gradle-wrapper.jar
+acme/!**/src/main/**/build/
+acme/!**/src/test/**/build/
+
+### STS ###
+acme/.apt_generated
+acme/.classpath
+acme/.factorypath
+acme/.project
+acme/.settings
+acme/.springBeans
+acme/.sts4-cache
+acme/bin/
+acme/!**/src/main/**/bin/
+acme/!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+acme/.idea
+acme/*.iws
+acme/*.iml
+acme/*.ipr
+acme/out/
+acme/!**/src/main/**/out/
+acme/!**/src/test/**/out/
+
+### NetBeans ###
+acme/nbproject/private/
+acme/nbbuild/
+acme/dist/
+acme/nbdist/
+acme/.nb-gradle/
+
+### VS Code ###
+acme/.vscode/
+
+### CSS no prefixer ###
+acme/src/main/resources/static/css/main-no-prefixer.css
+
+### Credentials ###
+acme/src/main/resources/application.properties
+acme/src/main/resources/application.yml
