@@ -1,2 +1,2 @@
-acme/.git/
-acme/.gitignore
+/acme/.git/
+/acme/.gitignore
