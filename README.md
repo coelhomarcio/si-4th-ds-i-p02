@@ -16,7 +16,8 @@ ___
 ##### Integrantes
 
 - RA 50831921015 | [Marcio Coelho](https://coelhomarcio.github.io/)  
-  [✉️ marciocoelho@gmail.com](mailto:marciocoelho@gmail.com)
+  [✉️ marciocoelho@gmail.com](mailto:marciocoelho@gmail.com)  
+  [✉️ marcio.coelho01@fatec.sp.gov.br](mailto:marcio.coelho01@fatec.sp.gov.br)
 
 - RA 50831921030 | [Victhória Nunes](https://github.com/victhorianunes/)  
   [✉️ victhoria.nunes@fatec.sp.gov.br](mailto:victhoria.nunes@fatec.sp.gov.br)
