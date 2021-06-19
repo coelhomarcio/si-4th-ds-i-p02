@@ -6,6 +6,7 @@ acme/build/
 acme/!gradle/wrapper/gradle-wrapper.jar
 acme/!**/src/main/**/build/
 acme/!**/src/test/**/build/
+acme/src/test/
 
 ### STS ###
 acme/.apt_generated
@@ -26,7 +27,7 @@ acme/*.iml
 acme/*.ipr
 acme/out/
 acme/!**/src/main/**/out/
-acme/!**/src/test/
+acme/!**/src/test/**/out/
 
 ### NetBeans ###
 acme/nbproject/private/
