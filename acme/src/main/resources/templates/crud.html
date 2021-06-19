@@ -1,0 +1,215 @@
+<!--&#10094;    Anterior-->
+<!--&#10095;    Próxima-->
+<!--&uarr;      Crescente-->
+<!--&darr;      Decrescente-->
+<!--&#128190;   Salvar-->
+<!--&#128683;   Falha-->
+<!--&#9989;     Sucesso-->
+<!--&#128194;   Detalhes-->
+<!--&#128221;   Editar-->
+<!--&#128465;   Excluir-->
+<!--&#10062;    Cancelar-->
+<!--&#128722;   Cart-->
+<!--&#128169;   Poo-->
+<!--&#9940;     Vazio-->
+<!--&#128279;   Link-->
+<!--&#9203;     Breve-->
+
+<th:block th:fragment="pagination">
+	<div class="pagination">
+		<p>
+			<th:block th:if="${pageable.hasPrevious()}">
+				<a th:href="@{|${route}/read/${order}/${pageable.previousOrFirst().pageNumber}/${size}/${sort}|}"
+				   title="Anterior">&#10094;</a>
+			</th:block>
+			<th:block th:unless="${pageable.hasPrevious()}">
+				<span title="Anterior">&#10094;</span>
+			</th:block>
+			<span th:text="${pageable.pageNumber} + 1"></span> / <span th:text="${pages}"></span>
+			<th:block th:if="${pageable.getPageNumber() < pages - 1}">
+				<a th:href="@{|${route}/read/${order}/${pageable.next().pageNumber}/${size}/${sort}|}"
+				   title="Próxima">&#10095;</a>
+			</th:block>
+			<th:block th:unless="${pageable.getPageNumber()} < ${pages} - 1">
+				<span title="Próxima">&#10095;</span>
+			</th:block>
+		</p>
+		<p>
+			<span>Registros por página</span>
+			<th:block th:if="${size == 5}">
+				<span>5</span>
+			</th:block>
+			<th:block th:unless="${size == 5}">
+				<a th:href="@{|${route}/read/${order}/${page}/5/${sort}|}">5</a>
+			</th:block>
+			<th:block th:if="${size == 10}">
+				<span>10</span>
+			</th:block>
+			<th:block th:unless="${size == 10}">
+				<a th:href="@{|${route}/read/${order}/${page}/10/${sort}|}">10</a>
+			</th:block>
+			<th:block th:if="${size == 20}">
+				<span>20</span>
+			</th:block>
+			<th:block th:unless="${size == 20}">
+				<a th:href="@{|${route}/read/${order}/${page}/20/${sort}|}">20</a>
+			</th:block>
+			<th:block th:if="${size == 50}">
+				<span>50</span>
+			</th:block>
+			<th:block th:unless="${size == 50}">
+				<a th:href="@{|${route}/read/${order}/${page}/50/${sort}|}">50</a>
+			</th:block>
+		</p>
+		<p><span>Registros</span> <span th:text="${objPageQty}"></span> / <span th:text="${objQty}"></span></p>
+	</div>
+</th:block>
+
+<th:block th:fragment="create">
+	<form action="/" th:action="@{|${route}/create|}" method="post" th:object="${obj}">
+		<th:block th:each="field : ${fields}">
+			<label th:for="${field}" th:text="${cols[fieldStat.index + 1]}"></label>
+			<input type="text" th:id="${field}" th:field="*{__${field}__}">
+		</th:block>
+		<input type="submit" value="&#128190;" title="Salvar">
+	</form>
+</th:block>
+
+<th:block th:fragment="read">
+	<table>
+		<thead>
+			<tr>
+				<th:block th:each="col : ${cols}">
+					<th><span th:text="${col}"></span></th>
+				</th:block>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th:block th:each="value : ${obj.values()}">
+					<th:block th:if="${cols[valueStat.index] == 'Preço'}">
+						<td class="right" th:text="${#numbers.formatCurrency(value)}"></td>
+					</th:block>
+					<th:block th:unless="${cols[valueStat.index] == 'Preço'}">
+						<td th:classappend="${cols[valueStat.index] == 'Código' or
+								cols[valueStat.index] == 'Quantidade'} ? 'center'"
+						    th:text="${value}"></td>
+					</th:block>
+				</th:block>
+				<td>
+					<span>
+						<a th:href="@{|${route}/update/${obj.values()[0]}|}"
+						   title="Editar">
+							&#128221;
+						</a>
+						<a th:href="@{|${route}/delete/${obj.values()[0]}|}"
+						   title="Excluir">
+							&#128465;
+						</a>
+					</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</th:block>
+
+<th:block th:fragment="reads">
+	<table th:if="${objQty > 0}">
+		<thead>
+			<tr>
+				<th:block th:each="col : ${cols}">
+					<th>
+						<a th:if="${order} == ${colStat.index} and ${sort} == 1"
+						   th:href="@{|${route}/read/${order}/${page}/${size}/0|}">
+							<span th:text="${col}"></span> <span title="Crescente">&uarr;</span>
+						</a>
+						<a th:if="${order} == ${colStat.index} and ${sort} == 0"
+						   th:href="@{|${route}/read/${order}/${page}/${size}/1|}">
+							<span th:text="${col}"></span> <span title="Decrescente">&darr;</span>
+						</a>
+						<a th:if="${order} != ${colStat.index}"
+						   th:href="@{|${route}/read/${colStat.index}/${page}/${size}/${sort}|}">
+							<span th:text="${col}"></span>
+						</a>
+					</th>
+				</th:block>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="obj : ${objs}">
+				<th:block th:each="value : ${obj.values()}">
+					<th:block th:if="${cols[valueStat.index] == 'Preço'}">
+						<td class="right" th:text="${#numbers.formatCurrency(value)}"></td>
+					</th:block>
+					<th:block th:unless="${cols[valueStat.index] == 'Preço'}">
+						<td th:classappend="${cols[valueStat.index] == 'Código' or
+								cols[valueStat.index] == 'Quantidade'} ? 'center'" th:text="${value}"></td>
+					</th:block>
+				</th:block>
+				<td>
+					<span>
+						<a th:href="@{|${route}/read/${obj.values()[0]}|}"
+						   title="Detalhes">
+							&#128194;
+						</a>
+						<a th:href="@{|${route}/update/${obj.values()[0]}|}"
+						   title="Editar">
+							&#128221;
+						</a>
+						<a th:href="@{|${route}/delete/${obj.values()[0]}|}"
+						   title="Excluir">
+							&#128465;
+						</a>
+					</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<th:block th:unless="${objQty > 0}">
+		<p><span>&#9940;</span><span>Vazio!</span></p>
+	</th:block>
+</th:block>
+
+<th:block th:fragment="update">
+	<form action="/" th:action="@{|${route}/update/*{__${fields[0]}__}|}" method="post" th:object="${obj}">
+		<th:block th:each="field : ${fields}">
+			<label th:for="${field}" th:text="${cols[fieldStat.index]}"></label>
+			<input type="text" th:id="${field}" th:field="*{__${field}__}" th:disabled="${fieldStat.index == 0}">
+		</th:block>
+		<input type="submit" value="&#128190;" title="Salvar">
+	</form>
+</th:block>
+
+<th:block th:fragment="delete">
+	<table>
+		<thead>
+			<tr>
+				<th:block th:each="col : ${cols}">
+					<th><span th:text="${col}"></span></th>
+				</th:block>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th:block th:each="value : ${obj.values()}">
+					<td th:text="${value}"></td>
+				</th:block>
+				<td>
+					<span>
+						<a th:href="@{|${route}/delete/${obj.values()[0]}/${token}|}"
+						   title="Excluir">
+							&#128465;
+						</a>
+						<a th:href="@{|${route}/read/${obj.values()[0]}|}"
+						   title="Cancelar">
+							&#10062;
+						</a>
+					</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</th:block>

@@ -1,0 +1,30 @@
+<header>
+	<div>
+		<img th:src="@{/logo/logo.png}" alt="Logo ACME" title="Logo ACME">
+		<h1>ACME Artigos esportivos</h1>
+	</div>
+	<nav>
+		<ul>
+			<li>
+				<a th:classappend="${#httpServletRequest.requestURI.contains('home')} ? 'active'"
+				   th:href="@{/home}">Home</a>
+			</li>
+			<li>
+				<a th:classappend="${#httpServletRequest.requestURI.contains('seller')} ? 'active'"
+				   th:href="@{/seller}">Vendedor</a>
+			</li>
+			<li>
+				<a th:classappend="${#httpServletRequest.requestURI.contains('customer')} ? 'active'"
+				   th:href="@{/customer}">Cliente</a>
+			</li>
+			<li>
+				<a th:classappend="${#httpServletRequest.requestURI.contains('product')} ? 'active'"
+				   th:href="@{/product}">Produtos</a>
+			</li>
+			<li>
+				<a th:classappend="${#httpServletRequest.requestURI.contains('cart')} ? 'active'"
+				   th:href="@{/cart}">Carrinho</a>
+			</li>
+		</ul>
+	</nav>
+</header>

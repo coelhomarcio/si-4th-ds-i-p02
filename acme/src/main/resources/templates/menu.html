@@ -1,0 +1,33 @@
+<th:block th:fragment="home">
+	<h2>Bem-vindo ao sistema de vendas da ACME</h2>
+	<img th:src="@{/logo/logotipo.png}" alt="Logotipo ACME" title="Logotipo ACME">
+</th:block>
+
+<th:block th:fragment="sections">
+	<th:block th:if="${route} == '/cart'">
+		<h2><span>&#9203;</span><span>Em breve!</span></h2>
+	</th:block>
+	<th:block th:unless="${route} == '/cart'">
+		<h2 th:text="${subtitle}"></h2>
+		<nav>
+			<ul>
+				<li>
+					<a th:classappend="${route} == '' ? 'active'"
+					   th:href="@{|${route}/create|}">Cadastro</a>
+				</li>
+				<li>
+					<a th:classappend="${#httpServletRequest.requestURI.contains('read')} ? 'active'"
+					   th:href="@{|${route}/read/${order}/${page}/${size}/${sort}|}">Consulta</a>
+				</li>
+				<li>
+					<a th:classappend="${#httpServletRequest.requestURI.contains('log')} ? 'active'"
+					   th:href="@{|${route}/read/${order}/${page}/${size}/${sort}|}">Log</a>
+				</li>
+			</ul>
+		</nav>
+		<th:block th:if="${response != null}">
+			<div class="response" th:utext="${response}">
+			</div>
+		</th:block>
+	</th:block>
+</th:block>

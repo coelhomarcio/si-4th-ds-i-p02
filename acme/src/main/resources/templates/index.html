@@ -1,0 +1,16 @@
+<th:block th:replace="head"></th:block>
+<th:block th:replace="header"></th:block>
+<main>
+	<th:block
+		th:replace="${#httpServletRequest.requestURI.contains('home')} ? ~{menu :: 'home'} : ~{menu :: 'sections'}">
+	</th:block>
+	<th:block th:if="${objQty > 0}">
+		<th:block th:replace="${pagination} ? ~{crud :: 'pagination'} : _"></th:block>
+	</th:block>
+	<th:block th:replace="${crud} ? ~{crud :: ${crud}} : _"></th:block>
+	<th:block th:if="${objPageQty >= 20 && objQty > 0}">
+		<th:block th:replace="${pagination} ? ~{crud :: 'pagination'} : _"></th:block>
+	</th:block>
+</main>
+<th:block th:replace="footer"></th:block>
+<th:block th:replace="foot"></th:block>
