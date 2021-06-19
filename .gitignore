@@ -26,7 +26,7 @@ acme/*.iml
 acme/*.ipr
 acme/out/
 acme/!**/src/main/**/out/
-acme/!**/src/test/**/out/
+acme/!**/src/test/
 
 ### NetBeans ###
 acme/nbproject/private/
